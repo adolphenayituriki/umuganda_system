@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Local leader dashboard</title>
+        <link rel="icon" type="image/png" href="/images/Portrait of a Young Man.png">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="/css/LocalLeaderDashboard.css">
+</head>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+      <div class="container">
+      <a class="navbar-brand" href="https://github.com/adolphenayituriki" target="_blank">LOCAL LEADER DASHBOARD</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="" onclick="makeEditable()">Update_Attendance</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="#"><i class="fa-solid fa-bell" style="color: red;"></i> </a>
+            </li>
+            <button class="dropdown-toggle" onclick="toggleDropdown()">
+            <img src="/images/Portrait of a Young Man.png" alt="User Profile">
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="#">Profile</a>
+                  <a href="#">Settings</a>
+                  <a href="#">Help</a>
+                  <a href="/index.html">Log out</a>
+            </div>
+            </div>
+      </div>
+      </nav>
+      <h1>Manage Attendance List</h1><span>
+      <div class="table-container">
+            <button class="btn btn-warning" style="float: right;" onclick="makeEditable()">UPDATE TABLE</button></span>
+            <h1>Umuganda Attendance - Kinyababa Sector</h1>
+        <table class="table table-striped table-bordered" id="attendanceTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Full Name</th>
+          <th>Cell</th>
+          <th>Village</th>
+          <th>Date Attended</th>
+          <th>Signature</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Mukamana Alice</td>
+          <td>Rukore</td>
+          <td>Gasharu</td>
+          <td>27/07/2025</td>
+          <td>✔️</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Twizeyimana Eric</td>
+          <td>Kinyababa</td>
+          <td>Nyabubare</td>
+          <td>27/07/2025</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Iradukunda Clarisse</td>
+          <td>Rugerero</td>
+          <td>Kabere</td>
+          <td>27/07/2025</td>
+          <td>✔️</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Habyarimana Jean Bosco</td>
+          <td>Rukore</td>
+          <td>Rugarama</td>
+          <td>27/07/2025</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Habyarimana Jean Bosco</td>
+          <td>Murambi</td>
+          <td>Musasa</td>
+          <td>27/07/2025</td>
+          <td>❌</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Habyarimana Jean Bosco</td>
+          <td>Rukore</td>
+          <td>Rugarama</td>
+          <td>27/07/2025</td>
+          <td>❌</td>
+        </tr>
+        <!-- Add more attendees here -->
+      </tbody>
+    </table>
+    <div class="text-center">
+        <button class="btn btn-success" onclick="saveChanges()">Save</button>
+    </div>
+  </div>
+    <h4 style="text-align: center;">Add New Attendee</h4>
+    <form id="addForm" onsubmit="addAttendee(event)">
+      <div class="row g-2">
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="newName" placeholder="Full Name" required>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="newCell" placeholder="Cell" required>
+        </div>
+        <div class="col-md-2">
+          <input type="text" class="form-control" id="newVillage" placeholder="Village" required>
+        </div>
+        <div class="col-md-3">
+          <input type="date" class="form-control" id="newDate" required>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-success w-100">Add</button>
+        </div>
+      </div>
+    </form>
+      <div class="mx-5 my-5">
+        <h2 style="text-align: center;" >NOTIFICATION: </h2>
+        <p id="notification" style="text-align: center;"></p>
+      </div>
+      <h2 style="text-align: center;">Send announcement to the citizensAnnouncements</h2>
+      <form id="announcementForm" onsubmit="postAnnouncement(event)">
+      <div class="mb-3">
+            <textarea class="form-control" id="announcementText" rows="3" placeholder="Write your announcement here..." required></textarea>
+      </div>
+    <button type="submit" class="btn btn-warning" id="postAnnouncement">Post Announcement</button>
+</form>
+
+<!-- Bootstrap JS bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="/js/LocalLeaderDashboard.js"></script>
+      <script src="/"></script>
+</body>
+</html>

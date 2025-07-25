@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Manage Fines</title>
+      <link rel="icon" type="image/png" href="/images/Portrait of a Young Man.png">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link rel="stylesheet" href="/css/ManageFines.css">
+</head>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+      <div class="container">
+      <a class="navbar-brand" href="https://github.com/adolphenayituriki" target="_blank">ADMIN DASHBOARD</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                  <a class="nav-link"  aria-current="page"  href="/html/ManageFines.html"><i class="fa-solid fa-house"></i> Home</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="location.href='#fines'">Manage_Fines</a>
+            </li>
+            <li class="nav-item">
+                  <a class="nav-link" href="#" onclick="ParticipationTrend()">Participation_Trends</a>
+            </li>
+            <button class="dropdown-toggle" onclick="toggleDropdown()">
+            <img src="/images/Portrait of a Young Man.png" alt="User Profile">
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+                  <a href="#">Profile</a>
+                  <a href="#">Settings</a>
+                  <a href="#">Help</a>
+                  <a href="/index.html">Log out</a>
+            </div>
+            </div>
+      </div>
+      </nav>
+      <section class="Participation_Trends" id="Participation_Trends">
+            <div class="headerChart">
+            <h1>UATS - Umuganda Attendance Visualization</h1>
+      </div>
+
+      <section class="chart">
+            <h2>📅 Monthly Attendance 2025 Current </h2>
+            <canvas id="monthlyChart"></canvas>
+      </section>
+      <section class="chart">
+            <h2>🤼 Attendance by Population Group/ youth, adult, elderly and students</h2>
+            <canvas id="populationChart"></canvas>
+      </section>
+      </section>
+      <main class="container">
+            <h1 style="color: burlywood; background-color: rgb(232, 229, 225); border-radius: 5px;">Manage fines</h1>
+            <section id="page2">
+                  </nav>
+                  <section id="dashboard">
+                        <h1>Welcome Dear leader: NAYITURIKI Adolphe</h1>
+                        <p>Umuganda Attendance & Fines Tracking System (UATS)</p>
+                        <p><strong>District:</strong> <span id="showDistrict"></span> |
+                        <strong>Sector:</strong> <span id="showSector"></span>
+                        </p>
+                  <form class="search-box" onsubmit="handleSearch(event)">
+                        <input type="text" id="searchInput" placeholder="Search fines list" required />
+                        <button type="submit" class="btn btn-success">Search Cell</button>
+                  </form>
+                  <div id="searchResults"></div>
+                  <div id="descriptionBox"></div>
+                  </section>
+                  <h2 style="background-color: white;" id="fines">Fine's Status in KINYABABA SECTOR</h2>
+                  <h3>KINYABABA SECTOR:</h3><span><button class="btn btn-warning" style="float: right;" onclick="makeEditable()">UPDATE TABLE</button></span>
+                  <table class="table1 table1-striped table1-bordered" id="attendanceTable">
+                        <thead>
+                              <tr>
+                                    <th>Cell</th>
+                                    <th>Number of Village</th>
+                                    <th>Number of Fines</th>
+                                    <th>Solved</th>
+                                    <th>Status/solved/not/ Decision</th>
+                                    <th id="update" style="display: none;">Edit</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <td>Bugamba</td>
+                                    <td>5</td>
+                                    <td>15 </td>
+                                    <td>2</td>
+                                    <td>❌<button class="btn btn-danger btn-sm">Solve this</button></td>
+                                    <td class="pen" id="pen">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>Kaganda</td>
+                                    <td>8</td>
+                                    <td>4</td>
+                                    <td>2</td>
+                                    <td>❌<button class="btn btn-danger btn-sm">Solve this</button></td>
+                                    <td class="pen" id="pen1">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>Musasa</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>✔️<button class="btn btn-success btn-sm">This solved </button></td>
+                                    <td class="pen" id="pen2">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>Rutovu</td>
+                                    <td>7</td>
+                                    <td>6</td>
+                                    <td>2</td>
+                                    <td>❌<button class="btn btn-danger btn-sm">Solve this</button></td>
+                                    <td class="pen" id="pen3">🖊</td>
+                              </tr>
+                        </tbody>
+                  </table>
+                  <button class="btn btn-success" id="save" style="float: left; display: none;" onclick="saveChanges()">SAVE</button></span>
+                  <div class="text-center">
+                        <button class="btn btn-success" onclick="saveChanges()">Save</button>
+                  </div>
+                  <section class="chart">
+                  
+                        <canvas id="monthlyChart"></canvas>
+                  </section>
+                  <h4 class="my-5">Peoples who are fined In This Month</h4><span><button class="btn btn-warning" style="float: right;" onclick="makeEditable2()" >UPDATE TABLE</button></span>
+                  <table class="table2 table2-striped table2-bordered" id="attendanceTable2">
+                        <thead>
+                              <tr>
+                                    <th>NAMES</th>
+                                    <th>CELL</th>
+                                    <th>VILLAGE</th>
+                                    <th>TELEPHONE</th>
+                                    <th>FINE'S STATUS</th>
+                                    <th class="pen" id="update">Edit</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                    <td>TURINIMANA James</td>
+                                    <td>Bugamba</td>
+                                    <td>Kabingo</td>
+                                    <td>0780563320</td>
+                                    <td>🧾<button class="btn btn-secondary btn-sm">In process</button></td>
+                                    <td class="pen" id="update">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>KALISA Jean Baptise</td>
+                                    <td>Musasa</td>
+                                    <td>Gitoma</td>
+                                    <td>0725463001</td>
+                                    <td>❌<button class="btn btn-danger btn-sm"> Not payed</button></td>
+                                    <td class="pen" id="pen3">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>Musasa</td>
+                                    <td>5</td>
+                                    <td>0</td>
+                                    <td>0</td>
+                                    <td>✔️<button class="btn btn-success btn-sm">Payed</button></td>
+                                    <td class="pen" id="pen2">🖊</td>
+                              </tr>
+                              <tr>
+                                    <td>KAMALIZA Jeannette</td>
+                                    <td>Musasa</td>
+                                    <td>Gitoma</td>
+                                    <td>0780900212</td>
+                                    <td>❌<button class="btn btn-danger btn-sm">Not payed</button></td>
+                                    <td class="pen" id="pen1">🖊</td>
+                              </tr>
+                        </tbody>
+                  </table>
+                  <button class="btn btn-success" id="save" style="float: left; display: none;" onclick="saveChanges()">SAVE</button></span>
+                  <div class="text-center">
+                        <button class="btn btn-success" onclick="saveChanges()">Save</button>
+                  </div>
+                  <h1>Umuganda Attendance & Fines Tracking System (UATS)</h1>
+                  <p>build my country-your country-and our country!</p>
+            </section>
+      </main>
+      <section class="Participation_Trends" style="display: none;" id="Participation_Trends">
+            <div class="headerChart">
+            <h1>UATS - Umuganda Attendance Visualization</h1>
+      </div>
+
+      <section class="chart">
+            <h2>📅 Monthly Attendance 2025 Current </h2>
+            <canvas id="monthlyChart"></canvas>
+      </section>
+      <section class="chart">
+            <h2>🤼 Attendance by Population Group/ youth, adult, elderly and students</h2>
+            <canvas id="populationChart"></canvas>
+      </section>
+      </section>
+      <section class="announcement">
+            <div class="message">
+                  <h2 class="m-5">ANNOUNCEMENT</h2>
+                  <div class="primary">
+                        <h2 class="mx-5" id="announcement">No current announcement available</h2>
+                  </div>
+            </div>
+      </section>
+<!-- Footer Section -->
+      <footer>
+      <div id="footer">
+            <p>Dear citizen, You can provide your suggestion to your Local Government or any helpful idea to the government.</p>
+            <form action="https://formsubmit.co/www.nayituriki.com@gmail.com" id="contactForm">
+                  <h1>Contact Us?</h1>
+                  <label for="username">Full Names:</label>
+                  <input type="text" id="username" name="username" placeholder="Enter your names" />
+                  <label for="username">District</label>
+                  <input type="text" id="username" name="username" placeholder="District name" />
+                  <label for="username">Sector</label>
+                  <input type="text" id="username" name="username" placeholder="District name" />
+                  <label for="username">Cell</label>
+                  <input type="text" id="username" name="username" placeholder="District name" />
+                  <label for="username">Village</label>
+                  <input type="text" id="username" name="username" placeholder="District name" />
+                  <label for="email">Email or Phone number</label>
+                  <input type="text" id="email" name="email" placeholder="Your email or phone number" required />
+                  <label for="message">Message</label>
+                  <input type="text" id="message" name="message" placeholder="Write here your message" />
+                  <input type="submit" value="Submit" />
+            </form>
+            Copyright © www.nayituriki.com@gmail.com
+      </div>
+      </footer>
+      </main>
+
+<!-- Bootstrap JS bundle -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="/js/ManageFines.js"></script>
+      <script src="/js/LocalLeaderDashboard.js"></script>
+</body>
+</html>
